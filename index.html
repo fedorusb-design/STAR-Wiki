@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Star – Gorebox. Создаём сервера в игре Gorebox, анонсы в Discord!">
+    <meta name="keywords" content="Gorebox, Star, сервера, игра, правила, Discord">
+    <meta name="author" content="Star">
+    <meta name="theme-color" content="#1a2332">
+    
+    <title>Star – Gorebox | Сервера</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
+    <link rel="icon" type="image/png" href="img/logo.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
+    <link rel="shortcut icon" href="img/favicon.ico">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://star-gorebox.com/">
+    <meta property="og:title" content="Star – Gorebox Servers">
+    <meta property="og:description" content="🎮 Создаём сервера в игре Gorebox! Присоединяйся к сообществу, все анонсы в Discord.">
+    <meta property="og:image" content="https://star-gorebox.com/img/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="ru_RU">
+    <meta property="og:site_name" content="Star Gorebox">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://star-gorebox.com/">
+    <meta name="twitter:title" content="Star – Gorebox Servers">
+    <meta name="twitter:description" content="🎮 Создаём сервера в игре Gorebox! Присоединяйся к сообществу.">
+    <meta name="twitter:image" content="https://star-gorebox.com/img/og-image.png">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- ========================================
+         Preloader
+         ======================================== -->
+    <div class="preloader" id="preloader">
+        <div class="preloader-content">
+            <!-- Логотип -->
+            <div class="preloader-logo">
+                <span class="preloader-logo-s">S</span>tar
+            </div>
+            
+            <!-- Вращающееся кольцо -->
+            <div class="preloader-ring">
+                <div class="preloader-ring-inner"></div>
+            </div>
+            
+            <!-- Прогресс-бар -->
+            <div class="preloader-progress">
+                <div class="preloader-progress-bar"></div>
+            </div>
+            
+            <!-- Текст -->
+            <div class="preloader-text">
+                ЗАГРУЗКА ДАННЫХ<span class="preloader-dots">...</span>
+            </div>
+        </div>
+        
+        <!-- Частицы -->
+        <div class="preloader-particles">
+            <div class="preloader-particle"></div>
+            <div class="preloader-particle"></div>
+            <div class="preloader-particle"></div>
+            <div class="preloader-particle"></div>
+            <div class="preloader-particle"></div>
+            <div class="preloader-particle"></div>
+        </div>
+    </div>
+
+    <!-- ========================================
+         Rules Navigation Overlay
+         ======================================== -->
+    <input type="checkbox" id="menu-toggle" class="menu-toggle-checkbox">
+    
+    <div class="menu-overlay">
+        <div class="menu-content">
+            <label for="menu-toggle" class="menu-close">✕</label>
+            
+            <div class="menu-header">
+                <h2 class="menu-title" data-i18n="rules.nav.title">📜 Навигация по правилам</h2>
+                <p class="menu-subtitle" data-i18n="rules.nav.subtitle">Выберите категорию</p>
+            </div>
+            
+            <nav class="menu-nav">
+                <ul class="menu-list">
+                    <!-- Общие правила -->
+                    <li class="menu-item menu-item-expandable">
+                        <input type="checkbox" id="submenu-general" class="submenu-toggle">
+                        <label for="submenu-general" class="menu-link rules-nav-link">
+                            <span class="menu-icon">📋</span>
+                            <span class="menu-text" data-i18n="rules.general">Общие правила</span>
+                            <span class="menu-expand-icon">▼</span>
+                        </label>
+                        <ul class="submenu-list">
+                            <li><a href="#rules-general" class="submenu-link">🎮 Основы игры</a></li>
+                            <li><a href="#rules-general" class="submenu-link">🎭 Погружение в роль</a></li>
+                            <li><a href="#rules-general" class="submenu-link">💬 Культура общения</a></li>
+                            <li><a href="#rules-general" class="submenu-link">🚫 Запреты</a></li>
+                            <li><a href="#rules-general" class="submenu-link">⚔️ Боевые действия</a></li>
+                            <li><a href="#rules-general" class="submenu-link">📝 Имена персонажей</a></li>
+                            <li><a href="#rules-general" class="submenu-link">⚠️ Наказания</a></li>
+                        </ul>
+                    </li>
+                    
+                    <!-- Звания -->
+                    <li class="menu-item menu-item-expandable">
+                        <input type="checkbox" id="submenu-ranks" class="submenu-toggle">
+                        <label for="submenu-ranks" class="menu-link rules-nav-link">
+                            <span class="menu-icon">🎖️</span>
+                            <span class="menu-text" data-i18n="rules.ranks">Звания</span>
+                            <span class="menu-expand-icon">▼</span>
+                        </label>
+                        <ul class="submenu-list">
+                            <li><a href="#rules-ranks" class="submenu-link">☭ Армия СССР</a></li>
+                            <li><a href="#rules-ranks" class="submenu-link">🌙 Моджахеды</a></li>
+                            <li><a href="#rules-ranks" class="submenu-link">⚠️ Общие правила</a></li>
+                        </ul>
+                    </li>
+                    
+                    <!-- Боевые правила -->
+                    <li class="menu-item menu-item-expandable">
+                        <input type="checkbox" id="submenu-combat" class="submenu-toggle">
+                        <label for="submenu-combat" class="menu-link rules-nav-link">
+                            <span class="menu-icon">⚔️</span>
+                            <span class="menu-text" data-i18n="rules.combat">Боевые правила</span>
+                            <span class="menu-expand-icon">▼</span>
+                        </label>
+                        <ul class="submenu-list">
+                            <li><a href="#rules-combat" class="submenu-link">🎯 Начало боя</a></li>
+                            <li><a href="#rules-combat" class="submenu-link">💀 Поведение в бою</a></li>
+                            <li><a href="#rules-combat" class="submenu-link">🩸 Ранения и ПМП</a></li>
+                            <li><a href="#rules-combat" class="submenu-link">🙌 Плен и сдача</a></li>
+                            <li><a href="#rules-combat" class="submenu-link">💣 Техника и взрывчатка</a></li>
+                            <li><a href="#rules-combat" class="submenu-link">💀 Новая жизнь (NLR)</a></li>
+                        </ul>
+                    </li>
+                    
+                    <!-- Наказания -->
+                    <li class="menu-item menu-item-expandable">
+                        <input type="checkbox" id="submenu-punish" class="submenu-toggle">
+                        <label for="submenu-punish" class="menu-link rules-nav-link">
+                            <span class="menu-icon">⚖️</span>
+                            <span class="menu-text" data-i18n="rules.punishments">Наказания</span>
+                            <span class="menu-expand-icon">▼</span>
+                        </label>
+                        <ul class="submenu-list">
+                            <li><a href="#rules-punishments" class="submenu-link">⚙️ Как это работает</a></li>
+                            <li><a href="#rules-punishments" class="submenu-link">📊 Виды нарушений</a></li>
+                            <li><a href="#rules-punishments" class="submenu-link">📜 Золотые правила</a></li>
+                            <li><a href="#rules-punishments" class="submenu-link">👨‍⚖️ Роль администрации</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+            
+            <!-- Menu Footer -->
+            <div class="menu-footer">
+                <div class="menu-divider"></div>
+                <p class="menu-footer-text">Star Military RP</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================
+         Header
+         ======================================== -->
+    <header class="header">
+        <!-- Logo -->
+        <a href="index.html" class="logo">
+            <img src="img/logo.png" alt="Star Logo" class="logo-img">
+            <span class="logo-text"><span>S</span>tar</span>
+        </a>
+        
+        <!-- Top Navigation Links -->
+        <nav class="top-nav">
+            <a href="#about" class="top-nav-link" data-i18n="nav.about">О проекте</a>
+            <a href="#team" class="top-nav-link">
+                <svg class="top-nav-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
+                </svg>
+                Разработчики
+            </a>
+            <a href="https://discord.gg/rBHWSk4eTT" target="_blank" class="top-nav-link">
+                <svg class="top-nav-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/>
+                </svg>
+                Discord
+            </a>
+            <a href="https://t.me/ZVEZDAMEME" target="_blank" class="top-nav-link">
+                <svg class="top-nav-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+                </svg>
+                Telegram
+            </a>
+        </nav>
+        
+        <!-- Header Right Section -->
+        <div class="header-right">
+            <!-- Language Switcher -->
+            <div class="lang-switcher">
+                <button class="lang-btn">
+                    <svg class="lang-icon" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+                    </svg>
+                    <span class="lang-current">RU</span>
+                    <svg class="lang-arrow" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M7 10l5 5 5-5z"/>
+                    </svg>
+                </button>
+                <div class="lang-dropdown">
+                    <a href="#" data-lang="ru" class="lang-option active">
+                        <span class="lang-flag">🇷🇺</span>
+                        Русский
+                    </a>
+                    <a href="#" data-lang="ua" class="lang-option">
+                        <span class="lang-flag">🇺🇦</span>
+                        Українська
+                    </a>
+                    <a href="#" data-lang="en" class="lang-option">
+                        <span class="lang-flag">🇬🇧</span>
+                        English
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Menu Button (Rules Navigation) -->
+            <label for="menu-toggle" class="menu-btn" aria-label="Навигация по правилам">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+        </div>
+    </header>
+
+    <!-- ========================================
+         Hero Section with Parallax
+         ======================================== -->
+    <section class="hero parallax-container">
+        <!-- Parallax Layers -->
+        <div class="parallax-layer parallax-back">
+            <div class="hero-bg"></div>
+        </div>
+        
+        <div class="parallax-layer parallax-mid">
+            <div class="parallax-particles">
+                <span class="particle"></span>
+                <span class="particle"></span>
+                <span class="particle"></span>
+                <span class="particle"></span>
+                <span class="particle"></span>
+                <span class="particle"></span>
+                <span class="particle"></span>
+                <span class="particle"></span>
+            </div>
+        </div>
+        
+        <!-- Dust Effect -->
+        <div class="dust-container">
+            <div class="dust dust-1"></div>
+            <div class="dust dust-2"></div>
+            <div class="dust dust-3"></div>
+            <div class="dust dust-4"></div>
+            <div class="dust dust-5"></div>
+            <div class="dust dust-6"></div>
+            <div class="dust dust-7"></div>
+            <div class="dust dust-8"></div>
+            <div class="dust dust-9"></div>
+            <div class="dust dust-10"></div>
+            <div class="dust dust-11"></div>
+            <div class="dust dust-12"></div>
+            <div class="dust dust-13"></div>
+            <div class="dust dust-14"></div>
+            <div class="dust dust-15"></div>
+        </div>
+        
+        <!-- Overlay -->
+        <div class="hero-overlay"></div>
+        
+        <!-- Content (Front Layer) -->
+        <div class="hero-content">
+            <div class="hero-title-box">
+                <h1 class="hero-title" data-i18n="hero.title">MILITARY RP</h1>
+            </div>
+            <h2 class="hero-subtitle" data-i18n="hero.subtitle">Gorebox Servers</h2>
+            
+            <div class="hero-divider"></div>
+            
+            <div class="hero-cta">
+                <a href="#rules" class="btn" data-i18n="hero.cta">Читать правила</a>
+            </div>
+        </div>
+        
+        <!-- Scroll Indicator -->
+        <div class="scroll-indicator">
+            <span></span>
+        </div>
+    </section>
+
+    <!-- ========================================
+         About Section
+         ======================================== -->
+    <section id="about" class="about-section">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title" data-i18n="about.title">О проекте</h2>
+                <p class="section-subtitle" data-i18n="about.subtitle">Star – Gorebox Servers</p>
+            </div>
+            <div class="about-content">
+                <p class="about-text" data-i18n="about.text">
+                    Добро пожаловать в Star! Мы создаём сервера в игре Gorebox.
+                    Все анонсы новых серверов, обновления и события публикуются в нашем Discord.
+                    Присоединяйтесь к сообществу и играйте вместе с нами!
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         Rules Section
+         ======================================== -->
+    <section id="rules" class="rules-section">
+        <div class="section-container">
+            <!-- Section Header -->
+            <div class="section-header">
+                <h2 class="section-title" data-i18n="rules.title">Правила сервера</h2>
+                <p class="section-subtitle" data-i18n="rules.subtitle">Ознакомьтесь с правилами перед началом игры</p>
+            </div>
+            
+            <!-- General Rules -->
+            <div id="rules-general" class="rules-category">
+                <h3 class="rules-category-title">
+                    <span class="rules-category-icon">📋</span>
+                    <span data-i18n="rules.general">Общие правила</span>
+                </h3>
+                <div class="rules-content">
+                    
+                    <!-- Раздел 1 -->
+                    <div class="rule-block">
+                        <div class="rule-header">
+                            <span class="rule-number">1</span>
+                            <h4 class="rule-title">Основы игры</h4>
+                        </div>
+                        <div class="rule-items">
+                            <div class="rule-item">
+                                <span class="rule-icon">🎭</span>
+                                <div class="rule-text">
+                                    <strong>Твой персонаж — твоя история:</strong> Мы играем в сеттинге Афганской войны. Твои действия должны подходить под образ солдата или местного жителя того времени.
+                                </div>
+                            </div>
+                            <div class="rule-item">
+                                <span class="rule-icon">⚖️</span>
+                                <div class="rule-text">
+                                    <strong>Правила для всех:</strong> Незнание того, что написано в этом списке, не избавляет от ответственности. Если ситуации нет в правилах, администрация решит её, исходя из логики и здравого смысла.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Раздел 2 -->
+                    <div class="rule-block">
+                        <div class="rule-header">
+                            <span class="rule-number">2</span>
+                            <h4 class="rule-title">Погружение в роль (RolePlay)</h4>
+                        </div>
+                        <div class="rule-items">
+                            <div class="rule-item">
+                                <span class="rule-icon">🎬</span>
+                                <div class="rule-text">
+                                    <strong>Оставайся в образе:</strong> Старайся не выходить из роли. Все разговоры «от лица игрока» (про лаги, дела в жизни и т.д.) переноси в специальный OOC-чат <code>/b</code>.
+                                </div>
+                            </div>
+                            <div class="rule-item">
+                                <span class="rule-icon">📖</span>
+                                <div class="rule-text">
+                                    <strong>Игра ради процесса, а не победы:</strong> Главное — крутая история. Если твой персонаж попал в засаду, отыграй это красиво, а не пытайся «выиграть» любой ценой.
+                                </div>
+                            </div>
+                            <div class="rule-item">
+                                <span class="rule-icon">🧠</span>
+                                <div class="rule-text">
+                                    <strong>Логика действий:</strong> Поступай так, как поступил бы реальный человек на войне. Не нужно прыгать со скал или в одиночку бежать с ножом на пулемет <span class="rule-tag">PowerGaming</span>.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Раздел 3 -->
+                    <div class="rule-block">
+                        <div class="rule-header">
+                            <span class="rule-number">3</span>
+                            <h4 class="rule-title">Культура общения</h4>
+                        </div>
+                        <div class="rule-items">
+                            <div class="rule-item">
+                                <span class="rule-icon">🤝</span>
+                                <div class="rule-text">
+                                    <strong>Будьте людьми:</strong> Мы здесь, чтобы отдыхать. Оскорбления игроков (не персонажей!), токсичность и дискриминация строго запрещены.
+                                </div>
+                            </div>
+                            <div class="rule-item">
+                                <span class="rule-icon">💬</span>
+                                <div class="rule-text">
+                                    <strong>Связь с админами:</strong> Если возник вопрос или проблема — пиши вежливо, тебе обязательно помогут.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Раздел 4 -->
+                    <div class="rule-block rule-block-danger">
+                        <div class="rule-header">
+                            <span class="rule-number">4</span>
+                            <h4 class="rule-title">Что делать нельзя (Основные запреты)</h4>
+                        </div>
+                        <div class="rule-items">
+                            <div class="rule-item rule-item-danger">
+                                <span class="rule-icon">🚫</span>
+                                <div class="rule-text">
+                                    <strong>NonRP:</strong> Не делай того, что невозможно в реальности или портит атмосферу другим.
+                                </div>
+                            </div>
+                            <div class="rule-item rule-item-danger">
+                                <span class="rule-icon">🔒</span>
+                                <div class="rule-text">
+                                    <strong>MetaGaming:</strong> Не используй информацию, которую ты узнал в Discord или из стримов, внутри игры. Твой персонаж знает только то, что видел или слышал сам.
+                                </div>
+                            </div>
+                            <div class="rule-item rule-item-danger">
+                                <span class="rule-icon">⛔</span>
+                                <div class="rule-text">
+                                    <strong>Баги и читы:</strong> Использование ошибок игры или стороннего софта — прямой путь в бан.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Раздел 5 -->
+                    <div class="rule-block">
+                        <div class="rule-header">
+                            <span class="rule-number">5</span>
+                            <h4 class="rule-title">Боевые действия и ранения</h4>
+                        </div>
+                        <div class="rule-items">
+                            <div class="rule-item">
+                                <span class="rule-icon">🎯</span>
+                                <div class="rule-text">
+                                    <strong>Сначала причина, потом выстрел:</strong> У любой стрельбы должна быть предыстория. Бессмысленный огонь во все стороны запрещен.
+                                </div>
+                            </div>
+                            <div class="rule-item">
+                                <span class="rule-icon">🩹</span>
+                                <div class="rule-text">
+                                    <strong>Ранения имеют значение:</strong> Если в тебя попали — отыграй боль или замедление. Ты не терминатор, ранения должны влиять на поведение персонажа.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Раздел 6 -->
+                    <div class="rule-block">
+                        <div class="rule-header">
+                            <span class="rule-number">6</span>
+                            <h4 class="rule-title">Имена и Персонажи</h4>
+                        </div>
+                        <div class="rule-items">
+                            <div class="rule-item">
+                                <span class="rule-icon">📛</span>
+                                <div class="rule-text">
+                                    <strong>Зови меня по имени:</strong> Выбирай реалистичный ник <code>Имя_Фамилия</code>, который подходит эпохе 80-х. Никаких «Terminator2000» или мемов.
+                                </div>
+                            </div>
+                            <div class="rule-item">
+                                <span class="rule-icon">❤️</span>
+                                <div class="rule-text">
+                                    <strong>Одна жизнь:</strong> Цени жизнь своего героя и не пытайся создавать десятки персонажей для обхода правил.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Раздел 7 -->
+                    <div class="rule-block rule-block-warning">
+                        <div class="rule-header">
+                            <span class="rule-number">7</span>
+                            <h4 class="rule-title">О наказаниях</h4>
+                        </div>
+                        <div class="rule-items">
+                            <div class="rule-item">
+                                <span class="rule-icon">⚠️</span>
+                                <div class="rule-text">
+                                    Нарушил? Можно получить <span class="rule-tag rule-tag-warn">предупреждение</span>, временную <span class="rule-tag rule-tag-mute">молчанку</span> или <span class="rule-tag rule-tag-ban">бан</span>. Админ сам выберет меру, исходя из того, насколько сильно пострадала атмосфера сервера.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <!-- Ranks -->
+            <div id="rules-ranks" class="rules-category">
+                <h3 class="rules-category-title">
+                    <span class="rules-category-icon">🎖️</span>
+                    <span data-i18n="rules.ranks">Система званий и иерархия</span>
+                </h3>
+                <div class="rules-content">
+                    
+                    <!-- Армия СССР -->
+                    <div class="rule-block rule-block-ussr">
+                        <div class="rule-header">
+                            <span class="rule-number">☭</span>
+                            <h4 class="rule-title">Армия СССР / Контингент</h4>
+                        </div>
+                        <div class="rule-intro">
+                            Здесь всё держится на <strong>субординации</strong>. Младший слушает старшего, приказ — есть приказ.
+                        </div>
+                        <div class="rule-items">
+                            <div class="rule-item">
+                                <span class="rule-icon">🎯</span>
+                                <div class="rule-text">
+                                    <strong>Соблюдай дистанцию:</strong> Если к тебе обращается офицер, отвечай четко и по делу. Не нужно панибратства, если вы не близкие друзья по сюжету.
+                                </div>
+                            </div>
+                            <div class="rule-item">
+                                <span class="rule-icon">⛓️</span>
+                                <div class="rule-text">
+                                    <strong>Цепочка командования:</strong> Все вопросы решаются через твоего непосредственного командира. Не беги через голову сержанта сразу к полковнику.
+                                </div>
+                            </div>
+                            <div class="rule-item">
+                                <span class="rule-icon">⭐</span>
+                                <div class="rule-text">
+                                    <strong>Звание — это ответственность:</strong>
+                                    <ul class="rule-sublist">
+                                        <li><code>Рядовой состав</code> — Выполняет задачи, следит за снаряжением.</li>
+                                        <li><code>Сержанты</code> — «Костяк» армии. Следят за порядком в группе и обучают новичков.</li>
+                                        <li><code>Офицеры</code> — Планируют операции и несут ответственность за жизни бойцов.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="rule-item">
+                                <span class="rule-icon">📻</span>
+                                <div class="rule-text">
+                                    <strong>Дисциплина в эфире:</strong> В рации говори кратко: кто ты, где ты и что видишь. Не засоряй эфир лишним шумом.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Моджахеды -->
+                    <div class="rule-block rule-block-muj">
+                        <div class="rule-header">
+                            <span class="rule-number">🌙</span>
+                            <h4 class="rule-title">Группировки Моджахедов</h4>
+                        </div>
+                        <div class="rule-intro">
+                            Здесь нет устава, но есть уважение к <strong>опыту, возрасту и вере</strong>. Лидер — это тот, за кем идут добровольно.
+                        </div>
+                        <div class="rule-items">
+                            <div class="rule-item">
+                                <span class="rule-icon">👑</span>
+                                <div class="rule-text">
+                                    <strong>Слово Полевого Командира — закон:</strong> В бою споры исключены. Если Амир сказал отступать или занять высоту, это не обсуждается.
+                                </div>
+                            </div>
+                            <div class="rule-item">
+                                <span class="rule-icon">🕌</span>
+                                <div class="rule-text">
+                                    <strong>Уважение к старшим (Шура):</strong> Важные решения часто принимаются советом старейшин или опытными бойцами. Проявляй уважение к тем, кто воюет дольше тебя.
+                                </div>
+                            </div>
+                            <div class="rule-item">
+                                <span class="rule-icon">🤝</span>
+                                <div class="rule-text">
+                                    <strong>Братство:</strong> Внутри отряда все равны перед Богом, но авторитет зарабатывается делами. Твой «ранг» — это то, насколько тебе доверяют братья по оружию.
+                                </div>
+                            </div>
+                            <div class="rule-item">
+                                <span class="rule-icon">🏠</span>
+                                <div class="rule-text">
+                                    <strong>Гостеприимство и верность:</strong> Предательство или неподобающее поведение позорит не только тебя, но и весь твой отряд <code>джамаат</code>.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Общие правила для всех сторон -->
+                    <div class="rule-block rule-block-warning">
+                        <div class="rule-header">
+                            <span class="rule-number">⚠️</span>
+                            <h4 class="rule-title">Общие правила для всех сторон</h4>
+                        </div>
+                        <div class="rule-items">
+                            <div class="rule-item">
+                                <span class="rule-icon">🎭</span>
+                                <div class="rule-text">
+                                    <strong>Соответствие роли:</strong> Если ты рядовой — не строй из себя генерала. Если ты простой боец в чалме — не пытайся командовать опытными ветеранами.
+                                </div>
+                            </div>
+                            <div class="rule-item">
+                                <span class="rule-icon">📈</span>
+                                <div class="rule-text">
+                                    <strong>Повышение за заслуги:</strong> Звания и авторитет выдаются за активную игру, участие в операциях и адекватное RP, а не просто за время, проведенное на сервере.
+                                </div>
+                            </div>
+                            <div class="rule-item rule-item-danger">
+                                <span class="rule-icon">🚫</span>
+                                <div class="rule-text">
+                                    <strong>Злоупотребление властью:</strong> Запрещено использовать свое высокое звание, чтобы просто «душить» новичков или портить им игру без RP-причин. <span class="rule-tag rule-tag-warn">предупреждение</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <!-- Combat Rules -->
+            <div id="rules-combat" class="rules-category">
+                <h3 class="rules-category-title">
+                    <span class="rules-category-icon">⚔️</span>
+                    <span data-i18n="rules.combat">Боевые правила</span>
+                </h3>
+                <div class="rules-content">
+                    
+                    <!-- 1. Начало боя -->
+                    <div class="rule-block">
+                        <div class="rule-header">
+                            <span class="rule-number">1</span>
+                            <h4 class="rule-title">Начало боя</h4>
+                        </div>
+                        <div class="rule-items">
+                            <div class="rule-item">
+                                <span class="rule-icon">🎯</span>
+                                <div class="rule-text">
+                                    <strong>Причина важнее пули:</strong> Нельзя открывать огонь просто потому, что ты увидел «врага». Сначала должна быть завязка: приказ командира, защита территории, ответ на провокацию или досмотр груза.
+                                </div>
+                            </div>
+                            <div class="rule-item">
+                                <span class="rule-icon">🔫</span>
+                                <div class="rule-text">
+                                    <strong>Предупредительный выстрел:</strong> Если ситуация позволяет, попробуй решить вопрос голосом или предупредительным выстрелом в воздух. Настоящая война — это не только стрельба, но и напряжение.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 2. Поведение в бою -->
+                    <div class="rule-block">
+                        <div class="rule-header">
+                            <span class="rule-number">2</span>
+                            <h4 class="rule-title">Поведение в бою</h4>
+                        </div>
+                        <div class="rule-items">
+                            <div class="rule-item">
+                                <span class="rule-icon">💀</span>
+                                <div class="rule-text">
+                                    <strong>Ты не бессмертный:</strong> В реальном бою никто не бегает в полный рост по открытому полю. Используй укрытия, переползай, прикрывай товарищей. Безрассудство приравнивается к <span class="rule-tag">PowerGaming</span>
+                                </div>
+                            </div>
+                            <div class="rule-item">
+                                <span class="rule-icon">😰</span>
+                                <div class="rule-text">
+                                    <strong>Страх — это нормально:</strong> Твой персонаж должен реагировать на обстрел. Если рядом разорвался снаряд или по тебе ведут плотный огонь, ты не можешь продолжать целиться как ни в чем не бывало.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 3. Ранения и ПМП -->
+                    <div class="rule-block rule-block-medical">
+                        <div class="rule-header">
+                            <span class="rule-number">3</span>
+                            <h4 class="rule-title">Ранения и ПМП (Первая помощь)</h4>
+                        </div>
+                        <div class="rule-items">
+                            <div class="rule-item">
+                                <span class="rule-icon">🩸</span>
+                                <div class="rule-text">
+                                    <strong>Упал — отыграй:</strong> Если тебя ранили, ты не можешь просто встать и побежать дальше. Упади, позови медика, используй бинты.
+                                </div>
+                            </div>
+                            <div class="rule-item">
+                                <span class="rule-icon">🏥</span>
+                                <div class="rule-text">
+                                    <strong>Тяжелые ранения:</strong> Если ранение серьезное, ты обязан ограничить свои действия (не можешь стрелять снайперски, медленно ходишь).
+                                </div>
+                            </div>
+                            <div class="rule-item">
+                                <span class="rule-icon">🩹</span>
+                                <div class="rule-text">
+                                    <strong>Помощь товарищу:</strong> Чтобы поднять раненого, нужно потратить время на отыгровку (перевязка, остановка кровотечения). Нельзя «вылечить» человека за одну секунду одним кликом.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 4. Плен и сдача -->
+                    <div class="rule-block">
+                        <div class="rule-header">
+                            <span class="rule-number">4</span>
+                            <h4 class="rule-title">Плен и сдача</h4>
+                        </div>
+                        <div class="rule-items">
+                            <div class="rule-item">
+                                <span class="rule-icon">🙌</span>
+                                <div class="rule-text">
+                                    <strong>Жизнь дороже гордости:</strong> Если ты окружен и шансов нет — подними руки. Плен — это не конец игры, а начало новой интересной RP-ветки (допрос, обмен пленными, побег).
+                                </div>
+                            </div>
+                            <div class="rule-item">
+                                <span class="rule-icon">⛓️</span>
+                                <div class="rule-text">
+                                    <strong>Правила для захватчиков:</strong> Запрещено издеваться над пленным «просто так». Допрос должен быть интересным для обеих сторон. Не держите человека в плену слишком долго, если не планируете важный сюжетный поворот.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 5. Техника и взрывчатка -->
+                    <div class="rule-block rule-block-danger">
+                        <div class="rule-header">
+                            <span class="rule-number">5</span>
+                            <h4 class="rule-title">Использование техники и взрывчатки</h4>
+                        </div>
+                        <div class="rule-items">
+                            <div class="rule-item rule-item-danger">
+                                <span class="rule-icon">💣</span>
+                                <div class="rule-text">
+                                    <strong>Гранаты и РПГ:</strong> Используй их с умом. Закидывать гранатами каждый куст — это дурной тон.
+                                </div>
+                            </div>
+                            <div class="rule-item rule-item-danger">
+                                <span class="rule-icon">🚁</span>
+                                <div class="rule-text">
+                                    <strong>Техника:</strong> Танки и БТР — это мощная сила. Их использование должно быть обосновано операцией, а не просто желанием «покататься и пострелять».
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 6. NLR -->
+                    <div class="rule-block rule-block-warning">
+                        <div class="rule-header">
+                            <span class="rule-number">6</span>
+                            <h4 class="rule-title">«Новая жизнь» (NLR)</h4>
+                        </div>
+                        <div class="rule-items">
+                            <div class="rule-item">
+                                <span class="rule-icon">💀</span>
+                                <div class="rule-text">
+                                    Если ты погиб в бою, ты <strong>не можешь помнить</strong> обстоятельства своей смерти.
+                                </div>
+                            </div>
+                            <div class="rule-item">
+                                <span class="rule-icon">⏱️</span>
+                                <div class="rule-text">
+                                    Запрещено возвращаться в тот же район боевых действий в течение <code>15-20 минут</code>. Для твоего нового персонажа (или подкрепления) этот бой еще не начался.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <!-- Punishments -->
+            <div id="rules-punishments" class="rules-category">
+                <h3 class="rules-category-title">
+                    <span class="rules-category-icon">⚖️</span>
+                    <span data-i18n="rules.punishments">Порядок и Наказания</span>
+                </h3>
+                <div class="rules-content">
+                    
+                    <!-- Вступление -->
+                    <div class="rules-intro-block">
+                        <p>Мы понимаем, что все могут ошибиться, особенно новички. Поэтому наша администрация старается быть <strong>лояльной, но справедливой</strong>. Помни: твоё поведение влияет на отдых других людей.</p>
+                    </div>
+                    
+                    <!-- Как это работает -->
+                    <div class="rule-block">
+                        <div class="rule-header">
+                            <span class="rule-number">1</span>
+                            <h4 class="rule-title">Как это работает</h4>
+                        </div>
+                        <div class="rule-items">
+                            <div class="rule-item">
+                                <span class="rule-icon">💬</span>
+                                <div class="rule-text">
+                                    <strong>Беседа:</strong> Если нарушение мелкое или ты просто чего-то не знал, админ сначала объяснит, в чем ошибка.
+                                </div>
+                            </div>
+                            <div class="rule-item">
+                                <span class="rule-icon">⚠️</span>
+                                <div class="rule-text">
+                                    <strong>Предупреждение (Warn):</strong> Выдается за повторные или явные нарушения правил. Несколько <span class="rule-tag rule-tag-warn">варнов</span> автоматически приводят к бану.
+                                </div>
+                            </div>
+                            <div class="rule-item">
+                                <span class="rule-icon">🔇</span>
+                                <div class="rule-text">
+                                    <strong>Временная изоляция (Kick/Mute):</strong> Если ты мешаешь игрокам в чате или создаешь помехи на сервере, тебя могут отключить от чата или исключить из сессии.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Виды нарушений -->
+                    <div class="rule-block">
+                        <div class="rule-header">
+                            <span class="rule-number">2</span>
+                            <h4 class="rule-title">Виды нарушений и последствия</h4>
+                        </div>
+                        <div class="rule-items">
+                            <div class="rule-item rule-item-light">
+                                <span class="rule-icon">🟢</span>
+                                <div class="rule-text">
+                                    <strong>Лёгкие</strong> <em>(Помехи, оффтоп в чате, Non-RP езда)</em><br>
+                                    <span class="rule-measure">Мера:</span> Устное предупреждение, кик или <span class="rule-tag rule-tag-mute">мут на 15-60 минут</span>
+                                </div>
+                            </div>
+                            <div class="rule-item rule-item-medium">
+                                <span class="rule-icon">🟡</span>
+                                <div class="rule-text">
+                                    <strong>Средние</strong> <em>(DM без причины, PG, MetaGaming, выход из игры во время RP-ситуации)</em><br>
+                                    <span class="rule-measure">Мера:</span> Длительный мут, <code>деморган</code> (тюрьма) или <span class="rule-tag rule-tag-ban">временный бан на 1–3 дня</span>
+                                </div>
+                            </div>
+                            <div class="rule-item rule-item-danger">
+                                <span class="rule-icon">🔴</span>
+                                <div class="rule-text">
+                                    <strong>Тяжёлые</strong> <em>(Читы, вредительство, жесткие оскорбления, рецидив)</em><br>
+                                    <span class="rule-measure">Мера:</span> <span class="rule-tag rule-tag-ban">Бан от 7 дней до перманентного</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Золотые правила -->
+                    <div class="rule-block rule-block-warning">
+                        <div class="rule-header">
+                            <span class="rule-number">3</span>
+                            <h4 class="rule-title">Золотые правила для нарушителей</h4>
+                        </div>
+                        <div class="rule-items">
+                            <div class="rule-item">
+                                <span class="rule-icon">🤐</span>
+                                <div class="rule-text">
+                                    <strong>Не спорь в процессе:</strong> Если админ сделал замечание — прими его. Если считаешь, что он не прав, подай жалобу в Discord в спокойной обстановке после ситуации.
+                                </div>
+                            </div>
+                            <div class="rule-item">
+                                <span class="rule-icon">🙏</span>
+                                <div class="rule-text">
+                                    <strong>Признание вины:</strong> Если ты честно признал ошибку и готов её исправить, админ может <strong>смягчить наказание</strong>.
+                                </div>
+                            </div>
+                            <div class="rule-item rule-item-danger">
+                                <span class="rule-icon">🚫</span>
+                                <div class="rule-text">
+                                    <strong>Обход наказания:</strong> Попытки создать новый аккаунт или сменить ник, чтобы избежать бана, караются <span class="rule-tag rule-tag-ban">блокировкой по железу/IP без права на разбан</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Роль администрации -->
+                    <div class="rule-block rule-block-admin">
+                        <div class="rule-header">
+                            <span class="rule-number">4</span>
+                            <h4 class="rule-title">Роль администрации</h4>
+                        </div>
+                        <div class="rule-intro">
+                            <span class="rule-icon-large">👨‍⚖️</span>
+                            <p>Администратор — это <strong>судья и помощник</strong>. Его главная задача — сохранить атмосферу Афганской войны. Если твои действия рушат погружение для остальных, админ имеет право вмешаться, даже если конкретный пункт не прописан в правилах «до запятой».</p>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         Team Section
+         ======================================== -->
+    <section id="team" class="team-section">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">Разработчики</h2>
+                <p class="section-subtitle">Команда проекта Star</p>
+            </div>
+            
+            <div class="team-grid">
+                <!-- Глава -->
+                <div class="team-card team-card-leader">
+                    <div class="team-card-badge">👑 ГЛАВА</div>
+                    <div class="team-avatar">
+                        <img src="img/team/jerrko.png" alt="JERRKO" class="team-avatar-img">
+                        <div class="team-avatar-border"></div>
+                    </div>
+                    <h3 class="team-name">JERRKO</h3>
+                    <p class="team-role">Основатель проекта</p>
+                </div>
+                
+                <!-- Evgene -->
+                <div class="team-card">
+                    <div class="team-card-badge">⭐ CO-OWNER</div>
+                    <div class="team-avatar">
+                        <img src="img/team/evgene.png" alt="Evgene" class="team-avatar-img">
+                        <div class="team-avatar-border"></div>
+                    </div>
+                    <h3 class="team-name">Evgene</h3>
+                    <p class="team-role">Со-владелец</p>
+                </div>
+                
+                <!-- Программист -->
+                <div class="team-card">
+                    <div class="team-card-badge">💻 ПРОГРАММИСТ</div>
+                    <div class="team-avatar">
+                        <img src="img/team/jerrko.png" alt="JERRKO" class="team-avatar-img">
+                        <div class="team-avatar-border"></div>
+                    </div>
+                    <h3 class="team-name">JERRKO</h3>
+                    <p class="team-role">Разработка</p>
+                </div>
+                
+                <!-- Художник -->
+                <div class="team-card">
+                    <div class="team-card-badge">🎨 ХУДОЖНИК</div>
+                    <div class="team-avatar">
+                        <img src="img/team/jerrko.png" alt="JERRKO" class="team-avatar-img">
+                        <div class="team-avatar-border"></div>
+                    </div>
+                    <h3 class="team-name">JERRKO</h3>
+                    <p class="team-role">Дизайн и арт</p>
+                </div>
+                
+                <!-- Helper -->
+                <div class="team-card">
+                    <div class="team-card-badge">🛡️ HELPER</div>
+                    <div class="team-avatar">
+                        <img src="img/team/mandarinka.png" alt="MANDARINKA" class="team-avatar-img">
+                        <div class="team-avatar-border"></div>
+                    </div>
+                    <h3 class="team-name">MANDARINKA</h3>
+                    <p class="team-role">Помощник</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         Back to Top Button
+         ======================================== -->
+    <button class="back-to-top" id="backToTop" aria-label="Наверх">
+        <svg class="back-to-top-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 15l-6-6-6 6"/>
+        </svg>
+        <span class="back-to-top-text">НАВЕРХ</span>
+    </button>
+
+    <!-- ========================================
+         Footer
+         ======================================== -->
+    <footer class="footer">
+        <p class="footer-text" data-i18n="footer.text">
+            © 2026 <span>Star</span> — Gorebox Servers. Все права защищены.
+        </p>
+    </footer>
+
+    <!-- 3D Parallax Effect -->
+    <script src="script.js"></script>
+</body>
+</html>
