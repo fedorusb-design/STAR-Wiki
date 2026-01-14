@@ -8,19 +8,23 @@ document.addEventListener('DOMContentLoaded', () => {
     // Preloader
     // ========================================
     const preloader = document.getElementById('preloader');
+
+    function hidePreloader() {
+        if (!preloader) return;
+        preloader.classList.add('hidden');
+        setTimeout(() => {
+            preloader.remove();
+        }, 600);
+    }
     
     // Скрываем прелоадер после загрузки
     window.addEventListener('load', () => {
-        setTimeout(() => {
-            if (preloader) {
-                preloader.classList.add('hidden');
-                // Удаляем прелоадер из DOM после анимации
-                setTimeout(() => {
-                    preloader.remove();
-                }, 600);
-            }
-        }, 2500); // Минимальное время показа прелоадера
+        // Без искусственной задержки: скрываем сразу, как только всё загрузилось
+        hidePreloader();
     });
+
+    // Safety: если событие load задерживается (расширения/битые ресурсы), не держим экран загрузки долго
+    setTimeout(hidePreloader, 900);
 
     // ========================================
     // Back to Top Button
@@ -46,6 +50,29 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // ========================================
+    // Scroll Animations (Intersection Observer)
+    // ========================================
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px"
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+                observer.unobserve(entry.target); // Play once
+            }
+        });
+    }, observerOptions);
+
+    // Elements to animate (will be selected after DOM fully loaded)
+    setTimeout(() => {
+        const revealElements = document.querySelectorAll('.reveal-on-scroll');
+        revealElements.forEach(el => observer.observe(el));
+    }, 100);
+
     const hero = document.querySelector('.hero');
     const heroBg = document.querySelector('.hero-bg');
     const dustContainer = document.querySelector('.dust-container');
@@ -68,11 +95,15 @@ document.addEventListener('DOMContentLoaded', () => {
         menuOverlay.addEventListener('click', (e) => {
             const menuContent = document.querySelector('.menu-content');
             // Если клик был на overlay, но не внутри menu-content
-            if (!menuContent.contains(e.target)) {
+            if (menuContent && !menuContent.contains(e.target) && menuToggle) {
                 menuToggle.checked = false;
             }
         });
     }
+
+    // Оптимизация для мобильных/снижения анимаций
+    const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints && navigator.maxTouchPoints > 0);
+    const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     // Настройки интенсивности эффекта (только фон)
     const settings = {
@@ -146,205 +177,19 @@ document.addEventListener('DOMContentLoaded', () => {
             `;
         });
 
-        // Динамическое свечение
-        if (hero) {
-            const lightX = 50 + currentX * 30;
-            const lightY = 50 + currentY * 30;
-            hero.style.setProperty('--mouse-x', `${lightX}%`);
-            hero.style.setProperty('--mouse-y', `${lightY}%`);
-        }
+        // Статичный баннер: без динамической подсветки по курсору
 
         requestAnimationFrame(animate);
     }
 
     // Инициализация
     if (hero) {
-        hero.addEventListener('mousemove', handleMouseMove);
-        hero.addEventListener('mouseleave', handleMouseLeave);
-
+        // По запросу: отключаем любые эффекты, реагирующие на курсор/сенсор
         if (heroBg) {
-            heroBg.style.transition = 'transform 0.3s ease-out';
+            heroBg.style.transform = 'scale(1.1)';
+            heroBg.style.transition = 'none';
         }
-
-        // Запускаем анимацию
-        animate();
     }
 
-    // Поддержка тач-устройств (гироскоп)
-    if (window.DeviceOrientationEvent && 'ontouchstart' in window) {
-        window.addEventListener('deviceorientation', (e) => {
-            if (e.gamma !== null && e.beta !== null) {
-                targetX = Math.max(-1, Math.min(1, e.gamma / 30));
-                targetY = Math.max(-1, Math.min(1, (e.beta - 45) / 30));
-            }
-        });
-    }
-
-    // ========================================
-    // Language Switcher
-    // ========================================
-    const translations = {
-        ru: {
-            // Header
-            'nav.about': 'О проекте',
-            'nav.discord': 'Discord',
-            'nav.telegram': 'Telegram',
-            
-            // Hero
-            'hero.title': 'MILITARY RP',
-            'hero.subtitle': 'Gorebox Servers',
-            'hero.cta': 'Читать правила',
-            
-            // Rules Navigation
-            'rules.nav.title': '📜 Навигация по правилам',
-            'rules.nav.subtitle': 'Выберите категорию',
-            'rules.general': 'Общие правила',
-            'rules.ranks': 'Звания',
-            'rules.rp': 'RP правила',
-            'rules.combat': 'Боевые правила',
-            'rules.vehicles': 'Техника',
-            'rules.punishments': 'Наказания',
-            
-            // About
-            'about.title': 'О проекте',
-            'about.subtitle': 'Star – Gorebox Servers',
-            'about.text': 'Добро пожаловать в Star! Мы создаём сервера в игре Gorebox. Все анонсы новых серверов, обновления и события публикуются в нашем Discord. Присоединяйтесь к сообществу и играйте вместе с нами!',
-            
-            // Rules Section
-            'rules.title': 'Правила сервера',
-            'rules.subtitle': 'Ознакомьтесь с правилами перед началом игры',
-            'rules.placeholder': 'Контент в разработке...',
-            
-            // Footer
-            'footer.text': '© 2026 <span>Star</span> — Gorebox Servers. Все права защищены.'
-        },
-        ua: {
-            // Header
-            'nav.about': 'Про проект',
-            'nav.discord': 'Discord',
-            'nav.telegram': 'Telegram',
-            
-            // Hero
-            'hero.title': 'MILITARY RP',
-            'hero.subtitle': 'Gorebox Servers',
-            'hero.cta': 'Читати правила',
-            
-            // Rules Navigation
-            'rules.nav.title': '📜 Навігація по правилах',
-            'rules.nav.subtitle': 'Оберіть категорію',
-            'rules.general': 'Загальні правила',
-            'rules.ranks': 'Звання',
-            'rules.rp': 'RP правила',
-            'rules.combat': 'Бойові правила',
-            'rules.vehicles': 'Техніка',
-            'rules.punishments': 'Покарання',
-            
-            // About
-            'about.title': 'Про проект',
-            'about.subtitle': 'Star – Gorebox Servers',
-            'about.text': 'Ласкаво просимо до Star! Ми створюємо сервери в грі Gorebox. Всі анонси нових серверів, оновлення та події публікуються в нашому Discord. Приєднуйтесь до спільноти та грайте разом з нами!',
-            
-            // Rules Section
-            'rules.title': 'Правила сервера',
-            'rules.subtitle': 'Ознайомтеся з правилами перед початком гри',
-            'rules.placeholder': 'Контент в розробці...',
-            
-            // Footer
-            'footer.text': '© 2026 <span>Star</span> — Gorebox Servers. Усі права захищені.'
-        },
-        en: {
-            // Header
-            'nav.about': 'About',
-            'nav.discord': 'Discord',
-            'nav.telegram': 'Telegram',
-            
-            // Hero
-            'hero.title': 'MILITARY RP',
-            'hero.subtitle': 'Gorebox Servers',
-            'hero.cta': 'Read Rules',
-            
-            // Rules Navigation
-            'rules.nav.title': '📜 Rules Navigation',
-            'rules.nav.subtitle': 'Select a category',
-            'rules.general': 'General Rules',
-            'rules.ranks': 'Ranks',
-            'rules.rp': 'RP Rules',
-            'rules.combat': 'Combat Rules',
-            'rules.vehicles': 'Vehicles',
-            'rules.punishments': 'Punishments',
-            
-            // About
-            'about.title': 'About',
-            'about.subtitle': 'Star – Gorebox Servers',
-            'about.text': 'Welcome to Star! We create servers in Gorebox game. All announcements for new servers, updates and events are posted on our Discord. Join the community and play with us!',
-            
-            // Rules Section
-            'rules.title': 'Server Rules',
-            'rules.subtitle': 'Please read the rules before playing',
-            'rules.placeholder': 'Content in development...',
-            
-            // Footer
-            'footer.text': '© 2026 <span>Star</span> — Gorebox Servers. All rights reserved.'
-        }
-    };
-
-    const langNames = {
-        ru: 'RU',
-        ua: 'UA',
-        en: 'EN'
-    };
-
-    // Получаем сохранённый язык или используем русский по умолчанию
-    let currentLang = localStorage.getItem('language') || 'ru';
-
-    // Функция для перевода страницы
-    function translatePage(lang) {
-        const elements = document.querySelectorAll('[data-i18n]');
-        elements.forEach(el => {
-            const key = el.getAttribute('data-i18n');
-            if (translations[lang] && translations[lang][key]) {
-                if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
-                    el.placeholder = translations[lang][key];
-                } else {
-                    el.innerHTML = translations[lang][key];
-                }
-            }
-        });
-
-        // Обновляем текущий язык в кнопке
-        const langCurrent = document.querySelector('.lang-current');
-        if (langCurrent) {
-            langCurrent.textContent = langNames[lang];
-        }
-
-        // Обновляем активный класс в dropdown
-        const langOptions = document.querySelectorAll('.lang-option');
-        langOptions.forEach(option => {
-            const optionLang = option.getAttribute('data-lang');
-            if (optionLang === lang) {
-                option.classList.add('active');
-            } else {
-                option.classList.remove('active');
-            }
-        });
-
-        // Сохраняем выбор
-        localStorage.setItem('language', lang);
-        currentLang = lang;
-    }
-
-    // Обработчики для переключения языка
-    const langOptions = document.querySelectorAll('.lang-option');
-    langOptions.forEach(option => {
-        option.addEventListener('click', (e) => {
-            e.preventDefault();
-            const lang = option.getAttribute('data-lang');
-            if (lang) {
-                translatePage(lang);
-            }
-        });
-    });
-
-    // Применяем сохранённый язык при загрузке
-    translatePage(currentLang);
+    // Переключатель языков убран: сайт остаётся только на русском.
 });
